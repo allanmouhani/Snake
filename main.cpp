@@ -16,9 +16,17 @@ int main() {
   cbreak();
   noecho();
 
+  box(stdscr, 0, 0);
+
+  unsigned x, y;
+  getmaxyx(stdscr, y, x);
+
+  y = (y / 2) - (CURSES_LINES / 2);
+  x = (x / 2) - (CURSES_COLS / 2);
+
   if( CursesWindow::term_has_colors() ) {
 
-    Game game;
+    Game game(y,x);
     game.play();
 
   }

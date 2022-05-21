@@ -14,7 +14,7 @@ Game::Game():
   init_pair(2, COLOR_WHITE, COLOR_GREEN);
   init_pair(3, COLOR_CYAN, COLOR_GREEN);
   init_pair(4, COLOR_RED, COLOR_RED);
-  init_pair(5, COLOR_WHITE, COLOR_WHITE);
+  init_pair(5, COLOR_YELLOW, COLOR_YELLOW);
 
   g.insert(0, 1, HEAD);
   g.insert(0, 0, TAIL);
@@ -30,6 +30,35 @@ Game::Game():
 
 
 } 
+
+
+Game::Game( unsigned curses_window_y0, unsigned curses_window_x0 ):
+  win( CURSES_LINES, CURSES_COLS, curses_window_y0, curses_window_x0), g( GRID_LINES, GRID_COLS ), sn( 0, 0 ) 
+
+{
+
+    
+  init_color( COLOR_GREEN, 126, 200, 80 );
+
+  init_pair(2, COLOR_WHITE, COLOR_GREEN);
+  init_pair(3, COLOR_CYAN, COLOR_GREEN);
+  init_pair(4, COLOR_RED, COLOR_RED);
+  init_pair(5, COLOR_YELLOW, COLOR_YELLOW);
+
+  g.insert(0, 1, HEAD);
+  g.insert(0, 0, TAIL);
+  g.insert( GRID_LINES/2, GRID_COLS/2, 1 );
+
+  sn.increase_tail(0, 0);
+
+  win.set_input_timeout(700);
+  win.display();
+
+  print_game();
+
+
+
+}
 
 
 
@@ -292,5 +321,7 @@ void Game::play() {
     print_game();
 
     }
+
+  win.destroy();
 
 }

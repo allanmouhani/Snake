@@ -32,6 +32,7 @@ private:
 
 public:
   Game();
+  Game( unsigned curses_window_y0, unsigned curses_window_x0 );
   void play();
 
 
